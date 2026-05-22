@@ -1,0 +1,46 @@
+name: Sales Data Quality Rules
+description: Validates sales pipeline data for quality and consistency
+
+rules:
+  - name: no_null_quantity
+    column: quantity
+    check: no_nulls
+    severity: high
+    message: "Quantity cannot be null"
+
+  - name: no_null_revenue
+    column: revenue
+    check: no_nulls
+    severity: high
+    message: "Revenue cannot be null"
+
+  - name: positive_quantity
+    column: quantity
+    check: positive_values
+    severity: high
+    message: "Quantity must be greater than zero"
+
+  - name: positive_revenue
+    column: revenue
+    check: positive_values
+    severity: high
+    message: "Revenue must be greater than zero"
+
+  - name: valid_category
+    column: category
+    check: allowed_values
+    values: [Electronics, Furniture]
+    severity: medium
+    message: "Category must be Electronics or Furniture"
+
+  - name: valid_region
+    column: region
+    check: allowed_values
+    values: [North, South, East, West]
+    severity: medium
+    message: "Region must be North, South, East, or West"
+
+  - name: no_duplicates
+    check: no_duplicates
+    severity: medium
+    message: "Dataset should not have duplicate rows"
